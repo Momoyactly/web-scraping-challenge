@@ -18,12 +18,25 @@
       <h2>{{ mars_data.News.title }}</h2>
       <p>{{mars_data.News.p}}</p>
       <h2>Featured Mars Image</h3>
-      <img src="{{mars_data.Feature_img}}" alt="Feature Image">
-      <h2>Mars Facts</h2>
-      <table border="1" class="dataframe">{{mars_data.table}}</table>
-      
+        <img src="{{mars_data.Feature_img}}" alt="Feature Image">
+        <h2>Mars Facts</h2>
+        <table border="1" class="dataframe">
+          {% for row in mars_data.table %}
+          <TR>
+            {% for item in row %}
+            <TD class="c2">{{item}}</TD>
+            {% endfor %}
+          </TR>
+          {% endfor %}
+        </table>
+        <h2>Mars Hemispheres</h2>
+        {% for row in mars_data.hemisphere_img %}
+        <p>{{row.Title}}</p>
+        <img src="{{row.Src}}" alt="{{row.Title}}">
+        {% endfor %}
+
     </div>
-    
+
   </div>
   </div>
 </body>

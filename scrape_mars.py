@@ -29,9 +29,7 @@ def scraper():
     url = 'https://galaxyfacts-mars.com/'
     tables = pd.read_html(url)
     df = tables[0]
-    df.columns = df.iloc[0]
-    df = df.drop(0).set_index('Mars - Earth Comparison')
-    table_data = df.to_dict('index')
+    table_data = df.values.tolist()
 
     url = 'https://marshemispheres.com/'
     browser.visit(url)
@@ -45,9 +43,11 @@ def scraper():
         soup_l2 = BeautifulSoup(html_l2, 'html.parser')
         cover_soup = soup_l2.find('div',class_='cover')
         h2 = cover_soup.find('h2',class_='title').text
-        a = cover_soup.find('a')['href']
+        dw_soup = soup_l2.find('div',class_='downloads')
+        a  = dw_soup.find('a')['href']
         hemisphere_image_urls.append({'Title':' '.join(h2.split(' ')[:-1]),\
-            'Src':url+href+a})
+            'Src':url+a})
+
     data = {
         'News': news,
         'Feature_img': featured_image_url,
