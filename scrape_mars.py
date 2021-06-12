@@ -47,7 +47,7 @@ def scraper():
         a  = dw_soup.find('a')['href']
         hemisphere_image_urls.append({'Title':' '.join(h2.split(' ')[:-1]),\
             'Src':url+a})
-
+    browser.quit()
     data = {
         'News': news,
         'Feature_img': featured_image_url,
